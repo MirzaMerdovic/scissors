@@ -1,4 +1,6 @@
 # HttpRequestInterceptor
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_shield)
+
 Highly configurable implementation of DelegatingHandler that can be used for mocking the behavior of requests sent to specific routes.
 
 ## Usage
@@ -84,3 +86,7 @@ You can use more than one "*" sign if you need to:
 }
 ```
 The above configuratio will intercept GET request that belong to routes similar to "api/product/2/locations/london" or "api/product/2/locations/42"
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_large)
