@@ -1,5 +1,7 @@
 # HttpRequestInterceptor
-[![Build status](https://ci.appveyor.com/api/projects/status/r7hyu8qeq5jaoj3d/branch/master?svg=true)](https://ci.appveyor.com/project/MirzaMerdovic/httprequestinterceptor/branch/master) [![CodeFactor](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor/badge)](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_shield)
+[![Build status](https://ci.appveyor.com/api/projects/status/r7hyu8qeq5jaoj3d/branch/master?svg=true)](https://ci.appveyor.com/project/MirzaMerdovic/httprequestinterceptor/branch/master) 
+[![CodeFactor](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor/badge)](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor) 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_shield)
 
 Highly configurable implementation of DelegatingHandler that can be used for mocking the behavior of requests sent to specific routes.
 
@@ -86,3 +88,7 @@ You can use more than one "*" sign if you need to:
 }
 ```
 The above configuratio will intercept GET request that belong to routes similar to "api/product/2/locations/london" or "api/product/2/locations/42"
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_large)
