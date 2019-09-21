@@ -1,4 +1,6 @@
 # HttpRequestInterceptor
+[![Build status](https://ci.appveyor.com/api/projects/status/r7hyu8qeq5jaoj3d/branch/master?svg=true)](https://ci.appveyor.com/project/MirzaMerdovic/httprequestinterceptor/branch/master) 
+[![CodeFactor](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor/badge)](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor) 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_shield)
 
 Highly configurable implementation of DelegatingHandler that can be used for mocking the behavior of requests sent to specific routes.

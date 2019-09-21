@@ -3,14 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleOut.Net.Http.Intercepting", "ConsoleOut.Net.Http.Intercepting\ConsoleOut.Net.Http.Intercepting.csproj", "{C6B41C18-4541-4137-9034-C4D82BBD126B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleOut.Net.Http.Intercepting", "ConsoleOut.Net.Http.Intercepting\ConsoleOut.Net.Http.Intercepting.csproj", "{C6B41C18-4541-4137-9034-C4D82BBD126B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleOut.Net.Http.Intercepting.Test", "ConsoleOut.Net.Http.Intercepting.Test\ConsoleOut.Net.Http.Intercepting.Test.csproj", "{BC25FBA6-B5EC-4B52-B404-B9F6DC73300A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleOut.Net.Http.Intercepting.Test", "ConsoleOut.Net.Http.Intercepting.Test\ConsoleOut.Net.Http.Intercepting.Test.csproj", "{BC25FBA6-B5EC-4B52-B404-B9F6DC73300A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{77EAA1C9-182B-4141-8F9C-2D3118762238}"
 	ProjectSection(SolutionItems) = preProject
 		..\CHANGELOG.md = ..\CHANGELOG.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{27D8B665-43B8-49D2-A162-F70D80234B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiExample", "WebApiExample\WebApiExample.csproj", "{4F07665F-1B63-4B53-8B2D-097B213E7A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +30,16 @@ Global
 		{BC25FBA6-B5EC-4B52-B404-B9F6DC73300A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC25FBA6-B5EC-4B52-B404-B9F6DC73300A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC25FBA6-B5EC-4B52-B404-B9F6DC73300A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F07665F-1B63-4B53-8B2D-097B213E7A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F07665F-1B63-4B53-8B2D-097B213E7A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F07665F-1B63-4B53-8B2D-097B213E7A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F07665F-1B63-4B53-8B2D-097B213E7A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4F07665F-1B63-4B53-8B2D-097B213E7A48} = {27D8B665-43B8-49D2-A162-F70D80234B61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73F51F19-8334-4F73-A048-9AF038DF1D05}
