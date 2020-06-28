@@ -21,11 +21,6 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
 
         private static HttpClient CreateClient()
         {
-            var options = new Collection<HttpInterceptorOptions>
-            {
-                new HttpInterceptorOptions { MethodName = "GET", Path = "/api/product/2", ReturnStatusCode = 200, ReturnJsonContent = "{2}"}
-            };
-
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile("appsettings.json", false);
 

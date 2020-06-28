@@ -10,7 +10,10 @@ namespace ConsoleOut.Net.Http.Intercepting
 {
     public sealed class RequestsInterceptor : DelegatingHandler
     {
-        private readonly char[] _splitter = new[] { '/' };
+        private const string Slash = "/";
+        private const string WildCard = "*";
+
+        private readonly char[] _splitter = Slash.ToCharArray();
 
         private readonly Collection<HttpInterceptorOptions> _options;
 
@@ -23,16 +26,18 @@ namespace ConsoleOut.Net.Http.Intercepting
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
-            foreach (var option in _options.Where(x => x.MethodName.Equals(request.Method.Method, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                var path = option.Path.StartsWith("/", StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
+            var options = _options.Where(x => x.MethodName.Equals(request.Method.Method, StringComparison.InvariantCultureIgnoreCase));
 
-                if (path.Contains("*"))
+            foreach (var option in options)
+            {
+                var path = option.Path.StartsWith(Slash, StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
+
+                if (path.Contains(WildCard))
                 {
                     var matchSegments = path.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
                     var segments = request.RequestUri.PathAndQuery.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
 
-                    var isMatch = matchSegments.Length == segments.Length;
+                    var isMatch = matchSegments.Length.Equals(segments.Length);
 
                     if (!isMatch)
                         continue;
@@ -42,7 +47,7 @@ namespace ConsoleOut.Net.Http.Intercepting
                         var match = matchSegments[i];
                         var segment = segments[i];
 
-                        isMatch = match.Equals(segment, StringComparison.InvariantCultureIgnoreCase) || match == "*";
+                        isMatch = match.Equals(segment, StringComparison.InvariantCultureIgnoreCase) || match == WildCard;
 
                         if (!isMatch)
                             break;
