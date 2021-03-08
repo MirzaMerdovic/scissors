@@ -1,6 +1,9 @@
 # HttpRequestInterceptor
-[![Build status](https://ci.appveyor.com/api/projects/status/r7hyu8qeq5jaoj3d/branch/master?svg=true)](https://ci.appveyor.com/project/MirzaMerdovic/httprequestinterceptor/branch/master) 
-[![CodeFactor](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor/badge)](https://www.codefactor.io/repository/github/mirzamerdovic/httprequestinterceptor) 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MirzaMerdovic_HttpRequestInterceptor&metric=coverage)](https://sonarcloud.io/dashboard?id=MirzaMerdovic_HttpRequestInterceptor)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MirzaMerdovic_HttpRequestInterceptor&metric=ncloc)](https://sonarcloud.io/dashboard?id=MirzaMerdovic_HttpRequestInterceptor)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=MirzaMerdovic_HttpRequestInterceptor&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=MirzaMerdovic_HttpRequestInterceptor)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=MirzaMerdovic_HttpRequestInterceptor&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=MirzaMerdovic_HttpRequestInterceptor)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=MirzaMerdovic_HttpRequestInterceptor&metric=security_rating)](https://sonarcloud.io/dashboard?id=MirzaMerdovic_HttpRequestInterceptor)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_shield)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/MirzaMerdovic/HttpRequestInterceptor.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MirzaMerdovic/HttpRequestInterceptor/alerts/)
 
