@@ -24,8 +24,6 @@ namespace ConsoleOut.Net.Http.Intercepting
 
         internal static HttpResponseMessage TryCreateResponse(this HttpInterceptorOptions options)
         {
-            _ = options ?? throw new ArgumentNullException(nameof(options));
-
             if (_handlers.TryGetValue((HttpStatusCode)options.ReturnStatusCode, out var handler))
                 return handler(options);
 
