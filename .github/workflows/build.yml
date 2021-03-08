@@ -44,6 +44,6 @@ jobs:
         run: |
           dotnet test .\src\Main.sln --collect:"XPlat Code Coverage" --settings .\src\ConsoleOut.Net.Http.Intercepting.Test\runsettings.xml
           dotnet build-server shutdown
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"MirzaMerdovic_HttpRequestInterceptor" /o:"mimme" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="src/ConsoleOut.Net.Http.Intercepting.Test/TestResults/*/coverage.opencover.xml" /d:sonar.coverage.exclusions="**Test*.cs,**WebApiExample*.cs"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"MirzaMerdovic_HttpRequestInterceptor" /o:"mimme" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="src/ConsoleOut.Net.Http.Intercepting.Test/TestResults/*/coverage.opencover.xml" /d:sonar.coverage.exclusions="**Test*.cs,**WebApiExample*.cs" /d:sonar.exclusions="**WebApiExample*.cs"
           dotnet build .\src\Main.sln   
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
