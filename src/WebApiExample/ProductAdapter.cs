@@ -23,8 +23,7 @@ namespace WebApiExample
         {
             var response = await _client.GetAsync($"api/product/{productId}").ConfigureAwait(false);
 
-            if (!response.IsSuccessStatusCode)
-                throw new Exception("Call failed");
+            response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
