@@ -8,7 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes
 - First version of RequestInterceptor.
 
-## [0.1.1] - 2020-06-28
-### Chages
+## [0.2.0] - 2020-06-28
+### Changes
 - Small refactoring and cleanup.
 - Upgraded Tests and Example to .net core 3.1
+
+## [0.3.0]
+### Changes
+- Upgraded Tests and Example to .net 5
+- Added more test
+- Fixed bug where expected 502 would return 502
+- Fixed bug with returning null on not configured return status, and now exception is thrown

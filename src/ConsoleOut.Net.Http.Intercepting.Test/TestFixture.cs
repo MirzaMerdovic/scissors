@@ -44,18 +44,12 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
             return client;
         }
 
-        #region IDisposable Support
-
-
-
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {
                 if (disposing)
-                {
                     Client?.Dispose();
-                }
 
                 _disposedValue = true;
             }
@@ -63,9 +57,9 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
 
         public void Dispose()
         {
-            Dispose(true);
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
-
-        #endregion
     }
 }

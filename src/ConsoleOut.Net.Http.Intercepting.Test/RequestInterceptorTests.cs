@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -89,6 +91,51 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
                 var response = await _fixture.Client.PutAsync("/api/product", stringContent);
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             }
+        }
+
+        [Fact]
+        public async Task ShouldMockUnauthorizedRequest()
+        {
+            var response = await _fixture.Client.GetAsync("/api/product/forbidden");
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ShouldMockBadGateway()
+        {
+            var response = await _fixture.Client.GetAsync("/api/product/bad");
+            Assert.Equal(HttpStatusCode.BadGateway, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ShouldMockTimeout()
+        {
+            var response = await _fixture.Client.GetAsync("/api/product/timeout");
+            Assert.Equal(HttpStatusCode.GatewayTimeout, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ShouldThrowNotSupportedException()
+        {
+            await Assert.ThrowsAsync<NotSupportedException>(() => _fixture.Client.GetAsync("/api/product/not-supported"));
+        }
+
+        [Fact]
+        public async Task ShouldMock201WithResponseHeaders()
+        {
+            var requestContent = JsonConvert.SerializeObject(new { });
+            using var stringContent = new StringContent(requestContent);
+
+            var response = await _fixture.Client.PostAsync("/api/product/headers", stringContent);
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+            var definition = new { id = 0 };
+            var payload = await response.Content.ReadAsStringAsync();
+
+            var content = JsonConvert.DeserializeAnonymousType(payload, definition);
+            Assert.Equal(42, content.id);
+            Assert.True(response.Headers.TryGetValues("test-header", out var headers));
+            Assert.Single(headers);
+            Assert.Equal("test", headers.First());
         }
     }
 }

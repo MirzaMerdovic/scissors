@@ -15,7 +15,7 @@ namespace ConsoleOut.Net.Http.Intercepting
             [HttpStatusCode.Unauthorized] = x => x.CreateMessage(HttpStatusCode.Unauthorized),
             [HttpStatusCode.InternalServerError] = x => x.CreateMessage(HttpStatusCode.InternalServerError),
             [HttpStatusCode.BadGateway] = x => x.CreateMessage(HttpStatusCode.BadGateway),
-            [HttpStatusCode.GatewayTimeout] = x => x.CreateMessage(HttpStatusCode.BadGateway),
+            [HttpStatusCode.GatewayTimeout] = x => x.CreateMessage(HttpStatusCode.GatewayTimeout),
 
             [HttpStatusCode.OK] = x => x.CreateMessage(HttpStatusCode.OK),
             [HttpStatusCode.Created] = x => x.CreateMessage(HttpStatusCode.Created),
@@ -24,13 +24,12 @@ namespace ConsoleOut.Net.Http.Intercepting
 
         internal static HttpResponseMessage TryCreateResponse(this HttpInterceptorOptions options)
         {
-            if (options == null)
-                return null;
+            _ = options ?? throw new ArgumentNullException(nameof(options));
 
             if (_handlers.TryGetValue((HttpStatusCode)options.ReturnStatusCode, out var handler))
                 return handler(options);
 
-            return null;
+           throw new NotSupportedException($"Response status: {options.ReturnStatusCode} is not supported.");
         }
 
         private static HttpResponseMessage CreateMessage(this HttpInterceptorOptions options, HttpStatusCode statusCode)

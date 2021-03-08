@@ -88,8 +88,23 @@ You can use more than one "*" sign if you need to:
     "ReturnJsonContent": "{ "Id": 1, "Name": "Product_1" }"
 }
 ```
-The above configuratio will intercept GET request that belong to routes similar to "api/product/2/locations/london" or "api/product/2/locations/42"
+The above configuration will intercept GET request that belong to routes similar to "api/product/2/locations/london" or "api/product/2/locations/42"
 
+### Notes
+There is no ranking support for routes, so you need to be careful with potential unexpected behaviors.
+For example imaginge you have configured two routes:
+* api/route/*
+* api/route/33
+
+If you hit in your browser: `api/route/33` mock of that route would never be invoked because the first route that contains a wild-card would be triggered.  
+In order to mitigate this change the order of the routes in your appsettings.json, so they go like this:
+* api/route/33
+* api/route/*
+
+This is of course not a solution for all possible routing scenarios, so there will be cases impossible to mock with interceptor.
+
+### TO DOs
+Implement route ranking support.
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMirzaMerdovic%2FHttpRequestInterceptor?ref=badge_large)

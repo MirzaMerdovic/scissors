@@ -32,6 +32,9 @@ namespace ConsoleOut.Net.Http.Intercepting
             {
                 var path = option.Path.StartsWith(Slash, StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
 
+                if (path.Equals(request.RequestUri.PathAndQuery, StringComparison.InvariantCultureIgnoreCase))
+                    return option.TryCreateResponse();
+
                 if (path.Contains(WildCard))
                 {
                     var matchSegments = path.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
@@ -56,9 +59,6 @@ namespace ConsoleOut.Net.Http.Intercepting
                     if (isMatch)
                         return option.TryCreateResponse();
                 }
-
-                if (path.Equals(request.RequestUri.PathAndQuery, StringComparison.InvariantCultureIgnoreCase))
-                    return option.TryCreateResponse();
             }
 
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
