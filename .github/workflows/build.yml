@@ -55,7 +55,7 @@ jobs:
       - name: Test
         uses: rocklan/dotnet-tests-report@master
         with:
-          project_path: .\src\Monitor.sln
+          project_path: .\src\Main.sln
           report_name: http_request_interceptor_test_report
           report_title: HttpRequestInterceptor Tests Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
