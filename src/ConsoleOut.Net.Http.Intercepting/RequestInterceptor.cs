@@ -13,7 +13,7 @@ namespace ConsoleOut.Net.Http.Intercepting
         private const string Slash = "/";
         private const string WildCard = "*";
 
-        private readonly char[] _splitter = Slash.ToCharArray();
+        private static readonly char[] _splitter = Slash.ToCharArray();
 
         private readonly Collection<HttpInterceptorOptions> _options;
 
@@ -26,42 +26,57 @@ namespace ConsoleOut.Net.Http.Intercepting
         {
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
-            var options = _options.Where(x => x.MethodName.Equals(request.Method.Method, StringComparison.InvariantCultureIgnoreCase));
+            var method = request.Method.Method;
+            var pathAndQuery = request.RequestUri.PathAndQuery;
 
-            foreach (var option in options)
-            {
-                var path = option.Path.StartsWith(Slash, StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
+            var options = _options.Where(x => x.MethodName.Equals(method, StringComparison.InvariantCultureIgnoreCase));
+            var option = options.FirstOrDefault(x => IsConfigurationMatch(x, pathAndQuery));
 
-                if (path.Equals(request.RequestUri.PathAndQuery, StringComparison.InvariantCultureIgnoreCase))
-                    return option.TryCreateResponse();
-
-                if (path.Contains(WildCard))
-                {
-                    var matchSegments = path.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
-                    var segments = request.RequestUri.PathAndQuery.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
-
-                    var isMatch = matchSegments.Length.Equals(segments.Length);
-
-                    if (!isMatch)
-                        continue;
-
-                    for (var i = 0; i < matchSegments.Length; i++)
-                    {
-                        var match = matchSegments[i];
-                        var segment = segments[i];
-
-                        isMatch = match.Equals(segment, StringComparison.InvariantCultureIgnoreCase) || match == WildCard;
-
-                        if (!isMatch)
-                            break;
-                    }
-
-                    if (isMatch)
-                        return option.TryCreateResponse();
-                }
-            }
+            if (option != null)
+                return option.TryCreateResponse();
 
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        private static bool IsConfigurationMatch(HttpInterceptorOptions option, string pathAndQuery)
+        {
+            var path = option.Path.StartsWith(Slash, StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
+
+            if (path.Equals(pathAndQuery, StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            if (!path.Contains(WildCard))
+                return false;
+
+            var segmentsToMatch = path.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
+            var querySegments = pathAndQuery.Split(_splitter, StringSplitOptions.RemoveEmptyEntries);
+
+            var isMatch = segmentsToMatch.Length.Equals(querySegments.Length);
+
+            if (!isMatch)
+                return isMatch;
+
+            isMatch = DoSegmentsMatch(segmentsToMatch, querySegments);
+
+            return isMatch;
+        }
+
+        private static bool DoSegmentsMatch(string[] segmentsToMatch, string[] querySegments)
+        {
+            var isMatch = false;
+
+            for (var i = 0; i < segmentsToMatch.Length; i++)
+            {
+                var match = segmentsToMatch[i];
+                var segment = querySegments[i];
+
+                isMatch = match.Equals(segment, StringComparison.InvariantCultureIgnoreCase) || match == WildCard;
+
+                if (!isMatch)
+                    return false;
+            }
+
+            return isMatch;
         }
     }
 }

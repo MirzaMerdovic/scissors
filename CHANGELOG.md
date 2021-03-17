@@ -19,3 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added more test
 - Fixed bug where expected 502 would return 502
 - Fixed bug with returning null on not configured return status, and now exception is thrown
+
+## [0.3.1]
+### Changes
+- Light refactoring
