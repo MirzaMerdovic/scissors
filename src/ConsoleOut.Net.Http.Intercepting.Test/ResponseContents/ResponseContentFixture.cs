@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 using static ConsoleOut.Net.Http.Intercepting.Test.InMemoryConfigurationWriter;
 
 namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
@@ -16,10 +15,18 @@ namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
                 BuildReturnJsonContentPair(0, null),
 
                 BuildMethodNamePair(1, "POST"),
-                BuildPathPair(1, "/api/product/headers"),
+                BuildPathPair(1, "/api/product/2"),
                 BuildHostPair(1, "*"),
                 BuildReturnStatusCodePair(1, 201.ToString()),
-                BuildReturnJsonContentPair(1, "{'id':42}")
+                BuildReturnJsonContentPair(1, "{'id':42}"),
+
+                BuildMethodNamePair(2, "POST"),
+                BuildPathPair(2, "/api/product/2/headers"),
+                BuildHostPair(2, "*"),
+                BuildReturnStatusCodePair(2, 200.ToString()),
+                BuildReturnJsonContentPair(2, null),
+                BuildResponseHeaderNamePair(2, 0, "User-Agent"),
+                BuildResponseHeaderValuePair(2, 0, "Test")
             })
         {
         }

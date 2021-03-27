@@ -36,7 +36,7 @@ namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
             using var stringContent = new StringContent(requestContent);
 
             var client = _fixture.GetClient();
-            var response = await client.PostAsync("/api/product/headers", stringContent);
+            var response = await client.PostAsync("/api/product/2", stringContent);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
             var definition = new { id = 0 };
@@ -44,6 +44,25 @@ namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
 
             var content = JsonConvert.DeserializeAnonymousType(payload, definition);
             Assert.Equal(42, content.id);
+        }
+
+
+        [Fact]
+        public async Task Should_Return_200_With_Headers()
+        {
+            var requestContent = JsonConvert.SerializeObject(new { });
+            using var stringContent = new StringContent(requestContent);
+
+            var client = _fixture.GetClient();
+            var response = await client.PostAsync("/api/product/2/headers", stringContent);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            var headers = response.Headers;
+            Assert.Single(headers);
+
+            var header = headers.First();
+            Assert.Equal("User-Agent", header.Key);
+            Assert.Equal("Test", header.Value.First());
         }
     }
 }
