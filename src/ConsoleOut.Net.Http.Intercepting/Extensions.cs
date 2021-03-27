@@ -13,13 +13,16 @@ namespace ConsoleOut.Net.Http.Intercepting
         {
             [HttpStatusCode.BadRequest] = x => x.CreateMessage(HttpStatusCode.BadRequest),
             [HttpStatusCode.Unauthorized] = x => x.CreateMessage(HttpStatusCode.Unauthorized),
+            [HttpStatusCode.Forbidden] = x => x.CreateMessage(HttpStatusCode.Forbidden),
+            [HttpStatusCode.NotFound] = x => x.CreateMessage(HttpStatusCode.NotFound),
+            [HttpStatusCode.RequestTimeout] = x => x.CreateMessage(HttpStatusCode.RequestTimeout),
+
             [HttpStatusCode.InternalServerError] = x => x.CreateMessage(HttpStatusCode.InternalServerError),
             [HttpStatusCode.BadGateway] = x => x.CreateMessage(HttpStatusCode.BadGateway),
             [HttpStatusCode.GatewayTimeout] = x => x.CreateMessage(HttpStatusCode.GatewayTimeout),
 
             [HttpStatusCode.OK] = x => x.CreateMessage(HttpStatusCode.OK),
-            [HttpStatusCode.Created] = x => x.CreateMessage(HttpStatusCode.Created),
-            [HttpStatusCode.NotFound] = x => x.CreateMessage(HttpStatusCode.NotFound)
+            [HttpStatusCode.Created] = x => x.CreateMessage(HttpStatusCode.Created)
         };
 
         internal static HttpResponseMessage TryCreateResponse(this HttpInterceptorOptions options)

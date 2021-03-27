@@ -1,47 +1,51 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 
 namespace ConsoleOut.Net.Http.Intercepting.Test
 {
-    public class TestFixture : IDisposable
+    public abstract class TestFixture : IDisposable
     {
         private const string BaseUrl = "http://localhost:5000/";
 
         private bool _disposedValue = false;
 
-        public HttpClient Client { get; }
+        private ServiceProvider _provider;
 
-        public TestFixture()
+        private IHttpClientFactory _factory;
+
+        protected TestFixture(List<KeyValuePair<string, string>> configurationPairs)
         {
-            Client = CreateClient();
+            _provider = BuildServiceProvider(configurationPairs);
+
+            _factory = _provider.GetRequiredService<IHttpClientFactory>();
         }
 
-        private static HttpClient CreateClient()
+        public HttpClient GetClient() => _factory.CreateClient("test");
+
+        private static ServiceProvider BuildServiceProvider(IEnumerable<KeyValuePair<string, string>> configurationPairs)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("appsettings.json", false);
-
+            builder.AddInMemoryCollection(configurationPairs);
             var configuration = builder.Build();
-            IConfigurationSection section = configuration.GetSection("HttpInterceptorOptions");
 
             IServiceCollection services = new ServiceCollection();
-            services.Configure<Collection<HttpInterceptorOptions>>(section);
+
+            services.Configure<Collection<HttpInterceptorOptions>>(configuration.GetSection("HttpInterceptorOptions"));
+
             services.AddTransient<RequestsInterceptor>();
 
-            services.AddHttpClient("product", c =>
+            services.AddHttpClient("test", c =>
             {
                 c.BaseAddress = new Uri(BaseUrl);
                 c.DefaultRequestHeaders.Add("User-Agent", "RequestInterceptorTests");
             })
             .AddHttpMessageHandler<RequestsInterceptor>();
 
-            var clientFactory = services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>();
-            var client = clientFactory.CreateClient("product");
-
-            return client;
+            return services.BuildServiceProvider();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -49,7 +53,12 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
             if (!_disposedValue)
             {
                 if (disposing)
-                    Client?.Dispose();
+                {
+                    _provider?.Dispose();
+
+                    _factory = null;
+                    _provider = null;
+                }
 
                 _disposedValue = true;
             }
@@ -57,7 +66,6 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

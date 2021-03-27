@@ -5,6 +5,11 @@ namespace ConsoleOut.Net.Http.Intercepting
     public class HttpInterceptorOptions
     {
         /// <summary>
+        /// Gets or sets the host value
+        /// </summary>
+        public string Host { get; set; }
+
+        /// <summary>
         /// Gets or sets the path that will be intercepted.
         /// </summary>
         /// <example>/api/user/2 or /user</example>
@@ -15,6 +20,12 @@ namespace ConsoleOut.Net.Http.Intercepting
         /// </summary>
         /// <example>POST or GET</example>
         public string MethodName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rank value.
+        /// </summary>
+        /// <remarks>Value 0 is the highest rank and it will be picked first. Default value is 0.</remarks>
+        public int Rank { get; internal set; }
 
         /// <summary>
         /// Gets or sets the status code for HTTP response message.

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.1</Version>
+    <Version>0.4.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/MirzaMerdovic/HttpRequestInterceptor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MirzaMerdovic/HttpRequestInterceptor.git</RepositoryUrl>

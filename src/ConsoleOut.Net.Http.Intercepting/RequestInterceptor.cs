@@ -27,10 +27,12 @@ namespace ConsoleOut.Net.Http.Intercepting
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
             var method = request.Method.Method;
+            var host = request.RequestUri.Host;
             var pathAndQuery = request.RequestUri.PathAndQuery;
+            var uri = request.RequestUri;
 
             var options = _options.Where(x => x.MethodName.Equals(method, StringComparison.InvariantCultureIgnoreCase));
-            var option = options.FirstOrDefault(x => IsConfigurationMatch(x, pathAndQuery));
+            var option = options.Where(x => IsConfigurationMatch(x, uri)).OrderBy(x => x.Rank).FirstOrDefault();
 
             if (option != null)
                 return option.TryCreateResponse();
@@ -38,8 +40,14 @@ namespace ConsoleOut.Net.Http.Intercepting
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         }
 
-        private static bool IsConfigurationMatch(HttpInterceptorOptions option, string pathAndQuery)
+        private static bool IsConfigurationMatch(HttpInterceptorOptions option, Uri requestUri)
         {
+            var host = requestUri.Host;
+            var pathAndQuery = requestUri.PathAndQuery;
+
+            if (!option.Host.Equals(WildCard) && !host.Equals(option.Host, StringComparison.CurrentCultureIgnoreCase))
+                return false;
+
             var path = option.Path.StartsWith(Slash, StringComparison.InvariantCultureIgnoreCase) ? option.Path : $"/{option.Path}";
 
             if (path.Equals(pathAndQuery, StringComparison.InvariantCultureIgnoreCase))

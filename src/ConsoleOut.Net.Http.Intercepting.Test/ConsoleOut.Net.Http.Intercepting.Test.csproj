@@ -30,10 +30,4 @@
     <ProjectReference Include="..\ConsoleOut.Net.Http.Intercepting\ConsoleOut.Net.Http.Intercepting.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
