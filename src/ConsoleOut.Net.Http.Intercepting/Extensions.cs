@@ -27,20 +27,20 @@ namespace ConsoleOut.Net.Http.Intercepting
 
         internal static HttpResponseMessage TryCreateResponse(this HttpInterceptorOptions options)
         {
-            if (_handlers.TryGetValue((HttpStatusCode)options.ReturnStatusCode, out var handler))
+            if (_handlers.TryGetValue((HttpStatusCode)options.ResponseStatusCode, out var handler))
                 return handler(options);
 
-           throw new NotSupportedException($"Response status: {options.ReturnStatusCode} is not supported.");
+           throw new NotSupportedException($"Response status: {options.ResponseStatusCode} is not supported.");
         }
 
         private static HttpResponseMessage CreateMessage(this HttpInterceptorOptions options, HttpStatusCode statusCode)
         {
             var message = new HttpResponseMessage(statusCode);
 
-            if (string.IsNullOrWhiteSpace(options.ReturnJsonContent))
+            if (string.IsNullOrWhiteSpace(options.ResponseJsonContent))
                 return message.AddResponseHeaders(options.Headers);
 
-            message.Content = new StringContent(options.ReturnJsonContent, Encoding.UTF8, "application/json");
+            message.Content = new StringContent(options.ResponseJsonContent, Encoding.UTF8, "application/json");
 
             return message.AddResponseHeaders(options.Headers);
         }

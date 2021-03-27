@@ -31,12 +31,12 @@ namespace ConsoleOut.Net.Http.Intercepting
         /// Gets or sets the status code for HTTP response message.
         /// </summary>
         /// <example>200 or 404</example>
-        public int ReturnStatusCode { get; set; }
+        public int ResponseStatusCode { get; set; }
 
         /// <summary>
         /// Gets or sets serialized response content.
         /// </summary>
-        public string ReturnJsonContent { get; set; }
+        public string ResponseJsonContent { get; set; }
 
         /// <summary>
         /// Gets or sets HTTP response headers.

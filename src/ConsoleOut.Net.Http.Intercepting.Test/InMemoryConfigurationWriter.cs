@@ -5,36 +5,41 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
     internal static class InMemoryConfigurationWriter
     {
         private const string Column = ":";
-
+        private const string Headers = "Headers";
         private const string SectionName = nameof(HttpInterceptorOptions) + Column;
 
-        private const string MethodNameKeyPath = Column + nameof(HttpInterceptorOptions.MethodName);
-        private const string HostKeyPath = Column + nameof(HttpInterceptorOptions.Host);
-        private const string PathKeyPath = Column + nameof(HttpInterceptorOptions.Path);
-        private const string ReturnStatusCodeKeyPath = Column + nameof(HttpInterceptorOptions.ReturnStatusCode);
-        private const string ReturnJsonContentKeyPath = Column + nameof(HttpInterceptorOptions.ReturnJsonContent);
-        private const string HeaderNameKeyPath = Column + nameof(HttpInterceptorOptions.HttpResponseHeader.Name);
-        private const string HeaderValueKeyPath = Column + nameof(HttpInterceptorOptions.HttpResponseHeader.Value);
+        // HttpInterceptorOptions:0:
+        private static string BasePath(int index) => $"{SectionName}{index}{Column}";
 
+        // Headers:0:
+        private static string BaseHeaderPath(int index) => $"{Headers}{Column}{index}{Column}";
+
+        // HttpInterceptorOptions:0:MethodName
         public static KeyValuePair<string, string> BuildMethodNamePair(int index, string value) =>
-            new($"{SectionName}{index}{MethodNameKeyPath}", value);
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.MethodName)}", value);
 
+        // HttpInterceptorOptions:0:Host
         public static KeyValuePair<string, string> BuildHostPair(int index, string value) =>
-            new($"{SectionName}{index}{HostKeyPath}", value);
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.Host)}", value);
 
+        // HttpInterceptorOptions:0:Path
         public static KeyValuePair<string, string> BuildPathPair(int index, string value) =>
-            new($"{SectionName}{index}{PathKeyPath}", value);
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.Path)}", value);
 
+        // HttpInterceptorOptions:0:ResponseStatusCode
         public static KeyValuePair<string, string> BuildReturnStatusCodePair(int index, string value) =>
-            new($"{SectionName}{index}{ReturnStatusCodeKeyPath}", value);
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.ResponseStatusCode)}", value);
 
+        // HttpInterceptorOptions:0:ResponseJsonContent
         public static KeyValuePair<string, string> BuildReturnJsonContentPair(int index, string value) =>
-            new($"{SectionName}{index}{ReturnJsonContentKeyPath}", value);
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.ResponseJsonContent)}", value);
 
+        // HttpInterceptorOptions:0:Headers:0:Name
         public static KeyValuePair<string, string> BuildResponseHeaderNamePair(int parentIndex, int index, string value) =>
-            new($"{SectionName}{parentIndex}{Column}Headers{Column}{index}{HeaderNameKeyPath}", value);
+            new($"{BasePath(parentIndex)}{BaseHeaderPath(index)}{nameof(HttpInterceptorOptions.HttpResponseHeader.Name)}", value);
 
+        // HttpInterceptorOptions:0:Headers:0:Value
         public static KeyValuePair<string, string> BuildResponseHeaderValuePair(int parentIndex, int index, string value) =>
-            new($"{SectionName}{parentIndex}{Column}Headers{Column}{index}{HeaderValueKeyPath}", value);
+            new($"{BasePath(parentIndex)}{BaseHeaderPath(index)}{nameof(HttpInterceptorOptions.HttpResponseHeader.Value)}", value);
     }
 }
