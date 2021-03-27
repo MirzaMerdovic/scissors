@@ -9,7 +9,7 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
 {
     public abstract class TestFixture : IDisposable
     {
-        private const string BaseUrl = "http://localhost:5000/";
+        private const string BaseUrl = "https://local.host/";
 
         private bool _disposedValue = false;
 
@@ -41,6 +41,7 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
             services.AddHttpClient("test", c =>
             {
                 c.BaseAddress = new Uri(BaseUrl);
+                c.Timeout = TimeSpan.FromMilliseconds(175);
                 c.DefaultRequestHeaders.Add("User-Agent", "RequestInterceptorTests");
             })
             .AddHttpMessageHandler<RequestsInterceptor>();

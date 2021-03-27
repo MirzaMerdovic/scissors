@@ -27,8 +27,6 @@ namespace ConsoleOut.Net.Http.Intercepting
             _ = request ?? throw new ArgumentNullException(nameof(request));
 
             var method = request.Method.Method;
-            var host = request.RequestUri.Host;
-            var pathAndQuery = request.RequestUri.PathAndQuery;
             var uri = request.RequestUri;
 
             var options = _options.Where(x => x.MethodName.Equals(method, StringComparison.InvariantCultureIgnoreCase));
