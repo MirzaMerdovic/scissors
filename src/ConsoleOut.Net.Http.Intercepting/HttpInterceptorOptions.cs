@@ -25,7 +25,7 @@ namespace ConsoleOut.Net.Http.Intercepting
         /// Gets or sets the rank value.
         /// </summary>
         /// <remarks>Value 0 is the highest rank and it will be picked first. Default value is 0.</remarks>
-        public int Rank { get; internal set; }
+        public int Rank { get; set; }
 
         /// <summary>
         /// Gets or sets the status code for HTTP response message.

@@ -39,5 +39,16 @@ namespace ConsoleOut.Net.Http.Intercepting.Test.SimpleRoutes
 
             _ = await Assert.ThrowsAsync<HttpRequestException>(() => get);
         }
+
+        [Fact]
+        public async Task Should_Mock_Paths_Withotu_Slash()
+        {
+            var client = _fixture.GetClient();
+
+            var response = await client.GetAsync("api/user/11");
+            var content = await response.Content.ReadAsStringAsync();
+
+            Assert.Equal("11", content);
+        }
     }
 }

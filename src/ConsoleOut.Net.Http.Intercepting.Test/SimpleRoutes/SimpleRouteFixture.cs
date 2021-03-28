@@ -19,7 +19,13 @@ namespace ConsoleOut.Net.Http.Intercepting.Test.SimpleRoutes
                 BuildPathPair(1, "/api/product/2"),
                 BuildHostPair(1, "*"),
                 BuildReturnStatusCodePair(1, 200.ToString()),
-                BuildReturnJsonContentPair(1, 2.ToString())
+                BuildReturnJsonContentPair(1, 2.ToString()),
+
+                BuildMethodNamePair(2, "GET"),
+                BuildPathPair(2, "api/user/*"),
+                BuildHostPair(2, "*"),
+                BuildReturnStatusCodePair(2, 200.ToString()),
+                BuildReturnJsonContentPair(2, 11.ToString())
             })
         {
         }

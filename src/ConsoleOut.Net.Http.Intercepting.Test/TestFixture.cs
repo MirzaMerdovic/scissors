@@ -41,7 +41,7 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
             services.AddHttpClient("test", c =>
             {
                 c.BaseAddress = new Uri(BaseUrl);
-                c.Timeout = TimeSpan.FromMilliseconds(175);
+                c.Timeout = TimeSpan.FromSeconds(1);
                 c.DefaultRequestHeaders.Add("User-Agent", "RequestInterceptorTests");
             })
             .AddHttpMessageHandler<RequestsInterceptor>();

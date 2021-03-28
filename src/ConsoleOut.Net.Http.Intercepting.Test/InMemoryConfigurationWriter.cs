@@ -34,6 +34,10 @@ namespace ConsoleOut.Net.Http.Intercepting.Test
         public static KeyValuePair<string, string> BuildReturnJsonContentPair(int index, string value) =>
             new($"{BasePath(index)}{nameof(HttpInterceptorOptions.ResponseJsonContent)}", value);
 
+        // HttpInterceptorOptions:0:Rank
+        public static KeyValuePair<string, string> BuildRankPair(int index, string value) =>
+            new($"{BasePath(index)}{nameof(HttpInterceptorOptions.Rank)}", value);
+
         // HttpInterceptorOptions:0:Headers:0:Name
         public static KeyValuePair<string, string> BuildResponseHeaderNamePair(int parentIndex, int index, string value) =>
             new($"{BasePath(parentIndex)}{BaseHeaderPath(index)}{nameof(HttpInterceptorOptions.HttpResponseHeader.Name)}", value);
