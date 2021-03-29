@@ -39,7 +39,7 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-          
+
       - name: Sonar Begin
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
       - name: Test
         uses: rocklan/dotnet-tests-report@master
         with:
-          project_path: .\src\Main.sln
+          project_path: .\src\scissors.sln
           report_name: http_request_interceptor_test_report
           report_title: HttpRequestInterceptor Tests Report
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -7,7 +7,7 @@ namespace ConsoleOut.Net.Http.Intercepting
         /// <summary>
         /// Gets or sets the host value
         /// </summary>
-        public string Host { get; set; }
+        public string Host { get; set; } = "*";
 
         /// <summary>
         /// Gets or sets the path that will be intercepted.
@@ -25,7 +25,7 @@ namespace ConsoleOut.Net.Http.Intercepting
         /// Gets or sets the rank value.
         /// </summary>
         /// <remarks>Value 0 is the highest rank and it will be picked first. Default value is 0.</remarks>
-        public int Rank { get; set; }
+        public int Rank { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the status code for HTTP response message.
