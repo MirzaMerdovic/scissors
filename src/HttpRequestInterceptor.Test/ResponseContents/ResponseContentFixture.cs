@@ -1,7 +1,6 @@
-﻿
-using static ConsoleOut.Net.Http.Intercepting.Test.InMemoryConfigurationWriter;
+﻿using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
+namespace Scissors.HttpRequestInterceptor.Test.ResponseContents
 {
     public sealed class ResponseContentFixture : TestFixture
     {

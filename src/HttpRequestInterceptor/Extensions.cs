@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace ConsoleOut.Net.Http.Intercepting
+namespace Scissors.HttpRequestInterceptor
 {
     internal static class Extensions
     {

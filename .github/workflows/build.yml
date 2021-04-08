@@ -64,7 +64,7 @@ jobs:
           gist_token: ${{ secrets.GIST_TOKEN }}
           set_check_status_from_test_outcome: true
           fail_build_on_failed_tests: true
-          extra_test_parameters: '--configuration release --collect:"XPlat Code Coverage" --settings .\src\ConsoleOut.Net.Http.Intercepting.Test\runsettings.xml'
+          extra_test_parameters: '--configuration release --collect:"XPlat Code Coverage" --settings .\src\HttpRequestInterceptor.Test\runsettings.xml'
 
       - name: Sonar End
         env:
@@ -72,3 +72,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: pwsh
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Publish NuGet
+        uses: brandedoutcast/publish-nuget@v2.5.5
+        with:
+          PROJECT_FILE_PATH: .\src\HttpRequestInterceptor\Scissors.HttpRequestInterceptor.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}

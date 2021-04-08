@@ -1,6 +1,6 @@
-﻿using static ConsoleOut.Net.Http.Intercepting.Test.InMemoryConfigurationWriter;
+﻿using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test.RankedRoutes
+namespace Scissors.HttpRequestInterceptor.Test.RankedRoutes
 {
     public class RankedRouteFixture : TestFixture
     {

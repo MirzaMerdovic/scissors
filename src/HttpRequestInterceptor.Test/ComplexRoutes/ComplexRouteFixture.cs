@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using static ConsoleOut.Net.Http.Intercepting.Test.InMemoryConfigurationWriter;
+using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test.ComplexRoutes
+namespace Scissors.HttpRequestInterceptor.Test.ComplexRoutes
 {
     public sealed class ComplexRouteFixture : TestFixture
     {

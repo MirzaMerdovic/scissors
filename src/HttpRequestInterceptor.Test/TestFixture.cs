@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test
+namespace Scissors.HttpRequestInterceptor.Test
 {
     public abstract class TestFixture : IDisposable
     {

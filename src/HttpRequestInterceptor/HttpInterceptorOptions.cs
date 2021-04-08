@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace ConsoleOut.Net.Http.Intercepting
+namespace Scissors.HttpRequestInterceptor
 {
     public class HttpInterceptorOptions
     {

@@ -1,9 +1,9 @@
-﻿using ConsoleOut.Net.Http.Intercepting;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Scissors.HttpRequestInterceptor;
 using System;
 using System.Collections.ObjectModel;
 

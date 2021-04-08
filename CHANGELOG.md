@@ -23,3 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.1]
 ### Changes
 - Light refactoring
+
+## [1.0.0]
+### Changes
+- Added action for pushing nuget package
+- Renamed project to Scissors.HttpRequestInterceptor.*

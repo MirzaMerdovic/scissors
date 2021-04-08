@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test
+namespace Scissors.HttpRequestInterceptor.Test
 {
     internal static class InMemoryConfigurationWriter
     {

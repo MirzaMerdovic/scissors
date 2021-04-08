@@ -26,11 +26,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleOut.Net.Http.Intercepting\ConsoleOut.Net.Http.Intercepting.csproj" />
+    <ProjectReference Include="..\HttpRequestInterceptor\Scissors.HttpRequestInterceptor.csproj" />
   </ItemGroup>
 
 </Project>

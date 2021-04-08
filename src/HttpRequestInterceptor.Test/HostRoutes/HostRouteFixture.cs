@@ -1,6 +1,6 @@
-﻿using static ConsoleOut.Net.Http.Intercepting.Test.InMemoryConfigurationWriter;
+﻿using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test.HostRoutes
+namespace Scissors.HttpRequestInterceptor.Test.HostRoutes
 {
     public sealed class HostRouteFixture : TestFixture
     {

@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace WebApiExample
@@ -27,7 +27,7 @@ namespace WebApiExample
 
             var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            var product = JsonConvert.DeserializeObject<Product>(content);
+            var product = JsonSerializer.Deserialize<Product>(content);
 
             return product;
         }

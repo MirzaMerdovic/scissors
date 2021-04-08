@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ConsoleOut.Net.Http.Intercepting.Test.ResponseContents
+namespace Scissors.HttpRequestInterceptor.Test.ResponseContents
 {
     public class ResponseContentTests : IClassFixture<ResponseContentFixture>
     {

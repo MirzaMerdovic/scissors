@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleOut.Net.Http.Intercepting
+namespace Scissors.HttpRequestInterceptor
 {
     public sealed class RequestsInterceptor : DelegatingHandler
     {
