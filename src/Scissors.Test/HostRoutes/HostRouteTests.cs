@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Scissors.HttpRequestInterceptor.Test.HostRoutes
+namespace Scissors.Test.HostRoutes
 {
     public class HostRouteTests : IClassFixture<HostRouteFixture>
     {

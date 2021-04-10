@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 
-namespace Scissors.HttpRequestInterceptor.Test
+namespace Scissors.Test
 {
     public abstract class TestFixture : IDisposable
     {
@@ -24,7 +24,7 @@ namespace Scissors.HttpRequestInterceptor.Test
             _factory = _provider.GetRequiredService<IHttpClientFactory>();
         }
 
-        public HttpClient GetClient() => _factory.CreateClient("test");
+        public HttpClient GetClient() => _factory.CreateClient("scissors");
 
         private static ServiceProvider BuildServiceProvider(IEnumerable<KeyValuePair<string, string>> configurationPairs)
         {
@@ -34,17 +34,17 @@ namespace Scissors.HttpRequestInterceptor.Test
 
             IServiceCollection services = new ServiceCollection();
 
-            services.Configure<Collection<HttpInterceptorOptions>>(configuration.GetSection("HttpInterceptorOptions"));
+            services.Configure<Collection<HttpRequestInterceptorOptions>>(configuration.GetSection(nameof(HttpRequestInterceptorOptions)));
 
-            services.AddTransient<RequestsInterceptor>();
+            services.AddTransient<HttpRequestInterceptor>();
 
-            services.AddHttpClient("test", c =>
+            services.AddHttpClient("scissors", c =>
             {
                 c.BaseAddress = new Uri(BaseUrl);
                 c.Timeout = TimeSpan.FromSeconds(1);
-                c.DefaultRequestHeaders.Add("User-Agent", "RequestInterceptorTests");
+                c.DefaultRequestHeaders.Add("User-Agent", "Scissors");
             })
-            .AddHttpMessageHandler<RequestsInterceptor>();
+            .AddHttpMessageHandler<HttpRequestInterceptor>();
 
             return services.BuildServiceProvider();
         }

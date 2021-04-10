@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Scissors.HttpRequestInterceptor.Test.RankedRoutes
+namespace Scissors.Test.RankedRoutes
 {
     public sealed class RankedRouteTests : IClassFixture<RankedRouteFixture>
     {

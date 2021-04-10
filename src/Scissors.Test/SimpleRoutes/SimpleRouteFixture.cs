@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
+using static Scissors.Test.InMemoryConfigurationWriter;
 
-namespace Scissors.HttpRequestInterceptor.Test.SimpleRoutes
+namespace Scissors.Test.SimpleRoutes
 {
     public sealed class SimpleRouteFixture : TestFixture
     {

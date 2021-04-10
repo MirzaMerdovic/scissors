@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HttpRequestInterceptor\Scissors.HttpRequestInterceptor.csproj" />
+    <ProjectReference Include="..\Scissors\Scissors.csproj" />
   </ItemGroup>
 
 </Project>

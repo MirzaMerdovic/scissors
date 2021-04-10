@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Scissors.HttpRequestInterceptor.Test.SimpleRoutes
+namespace Scissors.Test.SimpleRoutes
 {
     public class SimpleRouteTests : IClassFixture<SimpleRouteFixture>
     {
