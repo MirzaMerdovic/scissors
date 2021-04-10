@@ -6,20 +6,20 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Scissors.HttpRequestInterceptor
+namespace Scissors
 {
-    public sealed class RequestsInterceptor : DelegatingHandler
+    public sealed class HttpRequestInterceptor : DelegatingHandler
     {
         private const string Slash = "/";
         private const string WildCard = "*";
 
         private static readonly char[] _splitter = Slash.ToCharArray();
 
-        private readonly Collection<HttpInterceptorOptions> _options;
+        private readonly Collection<HttpRequestInterceptorOptions> _options;
 
-        public RequestsInterceptor(IOptions<Collection<HttpInterceptorOptions>> options)
+        public HttpRequestInterceptor(IOptions<Collection<HttpRequestInterceptorOptions>> options)
         {
-            _options = options?.Value ?? new Collection<HttpInterceptorOptions>();
+            _options = options?.Value ?? new Collection<HttpRequestInterceptorOptions>();
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -38,7 +38,7 @@ namespace Scissors.HttpRequestInterceptor
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         }
 
-        private static bool IsConfigurationMatch(HttpInterceptorOptions option, Uri requestUri)
+        private static bool IsConfigurationMatch(HttpRequestInterceptorOptions option, Uri requestUri)
         {
             var host = requestUri.Host;
             var pathAndQuery = requestUri.PathAndQuery;

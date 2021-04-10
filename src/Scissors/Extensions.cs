@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace Scissors.HttpRequestInterceptor
+namespace Scissors
 {
     internal static class Extensions
     {
-        private static readonly Dictionary<HttpStatusCode, Func<HttpInterceptorOptions, HttpResponseMessage>> _handlers = new Dictionary<HttpStatusCode, Func<HttpInterceptorOptions, HttpResponseMessage>>
+        private static readonly Dictionary<HttpStatusCode, Func<HttpRequestInterceptorOptions, HttpResponseMessage>> _handlers = new Dictionary<HttpStatusCode, Func<HttpRequestInterceptorOptions, HttpResponseMessage>>
         {
             [HttpStatusCode.BadRequest] = x => x.CreateMessage(HttpStatusCode.BadRequest),
             [HttpStatusCode.Unauthorized] = x => x.CreateMessage(HttpStatusCode.Unauthorized),
@@ -25,7 +25,7 @@ namespace Scissors.HttpRequestInterceptor
             [HttpStatusCode.Created] = x => x.CreateMessage(HttpStatusCode.Created)
         };
 
-        internal static HttpResponseMessage TryCreateResponse(this HttpInterceptorOptions options)
+        internal static HttpResponseMessage TryCreateResponse(this HttpRequestInterceptorOptions options)
         {
             if (_handlers.TryGetValue((HttpStatusCode)options.ResponseStatusCode, out var handler))
                 return handler(options);
@@ -33,7 +33,7 @@ namespace Scissors.HttpRequestInterceptor
            throw new NotSupportedException($"Response status: {options.ResponseStatusCode} is not supported.");
         }
 
-        private static HttpResponseMessage CreateMessage(this HttpInterceptorOptions options, HttpStatusCode statusCode)
+        private static HttpResponseMessage CreateMessage(this HttpRequestInterceptorOptions options, HttpStatusCode statusCode)
         {
             var message = new HttpResponseMessage(statusCode);
 
@@ -45,9 +45,9 @@ namespace Scissors.HttpRequestInterceptor
             return message.AddResponseHeaders(options.Headers);
         }
 
-        private static HttpResponseMessage AddResponseHeaders(this HttpResponseMessage message, Collection<HttpInterceptorOptions.HttpResponseHeader> headers)
+        private static HttpResponseMessage AddResponseHeaders(this HttpResponseMessage message, Collection<HttpRequestInterceptorOptions.HttpResponseHeader> headers)
         {
-            foreach (HttpInterceptorOptions.HttpResponseHeader header in headers)
+            foreach (HttpRequestInterceptorOptions.HttpResponseHeader header in headers)
             {
                 message.Headers.Add(header.Name, header.Value);
             }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xunit;
 
-namespace Scissors.HttpRequestInterceptor.Test.ResponseStatuses
+namespace Scissors.Test.ResponseStatuses
 {
     public sealed class ResponseStatusTests : IClassFixture<ResponseStatusFixture>
     {

@@ -1,6 +1,6 @@
-﻿using static Scissors.HttpRequestInterceptor.Test.InMemoryConfigurationWriter;
+﻿using static Scissors.Test.InMemoryConfigurationWriter;
 
-namespace Scissors.HttpRequestInterceptor.Test.ResponseStatuses
+namespace Scissors.Test.ResponseStatuses
 {
     public sealed class ResponseStatusFixture : TestFixture
     {

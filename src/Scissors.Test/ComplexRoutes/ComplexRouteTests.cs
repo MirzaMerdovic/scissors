@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Scissors.HttpRequestInterceptor.Test.ComplexRoutes
+namespace Scissors.Test.ComplexRoutes
 {
     public sealed class ComplexRouteTests : IClassFixture<ComplexRouteFixture>
     {

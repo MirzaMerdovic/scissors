@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Scissors.HttpRequestInterceptor;
+using Scissors;
 using System;
 using System.Collections.ObjectModel;
 
@@ -20,16 +20,16 @@ namespace WebApiExample
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<Collection<HttpInterceptorOptions>>(Configuration.GetSection("HttpInterceptorOptions"));
+            services.Configure<Collection<HttpRequestInterceptorOptions>>(Configuration.GetSection("HttpInterceptorOptions"));
 
-            services.AddTransient<RequestsInterceptor>();
+            services.AddTransient<HttpRequestInterceptor>();
 
             services.AddHttpClient<ProductAdapter>(
                 x =>
                 {
                     x.BaseAddress = new Uri("http://localhost:5000");
                     x.DefaultRequestHeaders.Add("User-Agent", "RequestInterceptorTests");
-                }).AddHttpMessageHandler<RequestsInterceptor>();
+                }).AddHttpMessageHandler<HttpRequestInterceptor>();
 
             services.AddTransient<IProductAdapter, ProductAdapter>();
 

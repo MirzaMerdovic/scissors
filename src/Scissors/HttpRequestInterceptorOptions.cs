@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Scissors.HttpRequestInterceptor
+namespace Scissors
 {
-    public class HttpInterceptorOptions
+    public class HttpRequestInterceptorOptions
     {
         /// <summary>
         /// Gets or sets the host value
