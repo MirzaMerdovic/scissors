@@ -75,9 +75,9 @@ jobs:
 
       - name: Publish nuget package to GitHub
         env:
-          SCISSONR_PAT: ${{ secrets.SCISSORS_PAT}}
+          SCISSORS_PAT: ${{ secrets.SCISSORS_PAT }}
         shell: pwsh
         run: |
           cd src\HttpRequestInterceptor
           dotnet pack --configuration Release
-          dotnet nuget push ".\bin\Release\*.nupkg" --api-key "${{ secrets.SCISSORS_PAT}}" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json"
+          dotnet nuget push ".\bin\Release\*.nupkg" --api-key "${{ secrets.SCISSORS_PAT }}" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json"
