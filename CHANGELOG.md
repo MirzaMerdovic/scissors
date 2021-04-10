@@ -28,3 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes
 - Added action for pushing nuget package
 - Renamed project to Scissors.HttpRequestInterceptor.*
+
+## [1.0.1]
+### Changes
+- Switched from Nuget package source to GitHub
