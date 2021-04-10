@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!--<GeneratePackageOnBuild>true</GeneratePackageOnBuild>-->
     <PackageId>Scissors</PackageId>
     <Version>1.0.0</Version>
-    <Authors>MirzaMerdovic</Authors>
-    <Company></Company>
+    <Authors>Mirza Merdovic</Authors>
     <PackageDescription>Highly configurable implementation of DelegatingHandler that can be used for mocking the behavior of requests sent to specific routes.</PackageDescription>
     <RepositoryUrl>https://github.com/MirzaMerdovic/HttpRequestInterceptor</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
