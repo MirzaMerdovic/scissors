@@ -73,8 +73,11 @@ jobs:
         shell: pwsh
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      - name: Publish NuGet
-        uses: brandedoutcast/publish-nuget@v2.5.5
-        with:
-          PROJECT_FILE_PATH: .\src\HttpRequestInterceptor\Scissors.HttpRequestInterceptor.csproj
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+      - name: Publish nuget package to GitHub
+        env:
+          SCISSONR_PAT: ${{ secrets.SCISSORS_PAT}}
+        shell: pwsh
+        run: |
+          cd src\HttpRequestInterceptor
+          dotnet pack --configuration Release
+        dotnet nuget push ".\src\HttpRequestInterceptor\bin\Release\*.nupkg"  --api-key ${{ secrets.SCISSORS_PAT}} --source "github"
