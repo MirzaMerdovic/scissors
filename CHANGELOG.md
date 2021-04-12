@@ -1,17 +1,28 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2019-07-07
+## [2.0.0]
 ### Changes
-- First version of RequestInterceptor.
+- Changed namespace from Scissors.HttpRequestInterceptor to Scissors
+- Renamed RequestsInterceptor to HttpRequestInterceptor
+- Renamed HttpInterceptorOptions to HttpRequestInterceptorOptions
 
-## [0.2.0] - 2020-06-28
+## [1.0.1]
 ### Changes
-- Small refactoring and cleanup.
-- Upgraded Tests and Example to .net core 3.1
+- Switched from Nuget package source to GitHub
+- Renamed project to Scissors.HttpRequestInterceptor.*
+
+## [1.0.0]
+### Changes
+- Added action for pushing nuget package
+- Renamed project to Scissors.HttpRequestInterceptor.*
+
+
+## [0.3.1]
+### Changes
+- Light refactoring
 
 ## [0.3.0]
 ### Changes
@@ -20,22 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug where expected 502 would return 502
 - Fixed bug with returning null on not configured return status, and now exception is thrown
 
-## [0.3.1]
+## [0.2.0] - 2020-06-28
 ### Changes
-- Light refactoring
+- Small refactoring and cleanup.
+- Upgraded Tests and Example to .net core 3.1
 
-## [1.0.0]
+## [0.1.0] - 2019-07-07
 ### Changes
-- Added action for pushing nuget package
-- Renamed project to Scissors.HttpRequestInterceptor.*
-
-## [1.0.1]
-### Changes
-- Switched from Nuget package source to GitHub
-- Renamed project to Scissors.HttpRequestInterceptor.*
-
-## [2.0.0]
-### Changes
-- Changed namespace from Scissors.HttpRequestInterceptor to Scissors
-- Renamed RequestsInterceptor to HttpRequestInterceptor
-- Renamed HttpInterceptorOptions to HttpRequestInterceptorOptions
+- First version of RequestInterceptor.
