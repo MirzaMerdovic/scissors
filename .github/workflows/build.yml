@@ -72,10 +72,23 @@ jobs:
         shell: pwsh
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      - name: Publish nupkg package to GitHub
-        if: github.ref == 'refs/heads/branch-zero'
+      - name: Create nupkg
+        #if: github.ref == 'refs/heads/branch-zero'
         shell: pwsh
         run: |
           cd src\Scissors
           dotnet pack --configuration Release
-          dotnet nuget push ".\bin\Release\*.nupkg" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json" --api-key "${{ secrets.SCISSORS_PAT }}"
+
+      - name: Publish nupkg package to GitHub
+        #if: github.ref == 'refs/heads/branch-zero'
+        shell: pwsh
+        run: |
+          cd src\Scissors
+          dotnet nuget push ".\bin\Release\*.nupkg" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json" --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
+
+      - name: Publish nupkg package to Nuget
+        #if: github.ref == 'refs/heads/branch-zero'
+        shell: pwsh
+        run: |
+          cd src\Scissors
+          dotnet nuget push ".\bin\Release\*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
