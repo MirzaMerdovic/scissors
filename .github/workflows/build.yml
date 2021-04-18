@@ -98,7 +98,7 @@ jobs:
         shell: pwsh
         run: |
           cd ${{ env.ROOT_FOLDER }}
-          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ NUGET_SOURCE }}  --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ env.NUGET_SOURCE }}  --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
 
       - name: Publish nupkg package to Nuget
         env:
@@ -108,4 +108,4 @@ jobs:
         shell: pwsh
         run: |
           cd ${{ env.ROOT_FOLDER }}
-          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ NUGET_SOURCE }} --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ env.NUGET_SOURCE }} --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
