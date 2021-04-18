@@ -44,7 +44,8 @@ jobs:
 
       - name: Sonar Begin
         env:
-          OPENCOVER_REPORTS_PATH: ./_TMP/*/coverage.opencover.xml
+          OPENCOVER_REPORTS_PATH: "./_TMP/*/coverage.opencover.xml"
+          COVERAGE_EXCLUSIONS: "**Test*.cs"
         shell: pwsh
         run: >
           ./.sonar/scanner/dotnet-sonarscanner begin
@@ -52,8 +53,8 @@ jobs:
           /o:"mimme"
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
-          /d:sonar.cs.opencover.reportsPaths="${{ env.OPENCOVER_REPORTS_PATH }}"
-          /d:sonar.coverage.exclusions="**Test*.cs"
+          /d:sonar.cs.opencover.reportsPaths=${{ env.OPENCOVER_REPORTS_PATH }}
+          /d:sonar.coverage.exclusions=${{ COVERAGE_EXCLUSIONS }}
           
       - name: Test
         uses: rocklan/dotnet-tests-report@master
