@@ -83,19 +83,29 @@ jobs:
         run: ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Create nupkg
+        env:
+          ROOT_FOLDER: src/Scissors
         shell: pwsh
         run: |
-          cd src/Scissors
+          cd ${{ env.ROOT_FOLDER }}
           dotnet pack --configuration Release
 
       - name: Publish nupkg package to GitHub
+        env:
+          ROOT_FOLDER: src/Scissors
+          NUPKG_LOCATION: ./bin/Release/*.nupkg
+          NUGET_SOURCE: https://nuget.pkg.github.com/MirzaMerdovic/index.json
         shell: pwsh
         run: |
-          cd src/Scissors
-          dotnet nuget push "./bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json" --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
+          cd ${{ env.ROOT_FOLDER }}
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ NUGET_SOURCE }}  --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
 
       - name: Publish nupkg package to Nuget
+        env:
+          ROOT_FOLDER: src/Scissors
+          NUPKG_LOCATION: ./bin/Release/*.nupkg
+          NUGET_SOURCE: https://api.nuget.org/v3/index.json
         shell: pwsh
         run: |
-          cd src/Scissors
-          dotnet nuget push "./bin/Release/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
+          cd ${{ env.ROOT_FOLDER }}
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ NUGET_SOURCE }} --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
