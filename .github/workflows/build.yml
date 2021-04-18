@@ -65,7 +65,7 @@ jobs:
           GIST_NAME: scissors_tests.md
           EXTRA_TEST_PARAMETERS: '--configuration release --collect:"XPlat Code Coverage" --settings ./src/Scissors.Test/runsettings.xml'
         with:
-          project_path: ${{ PROJECT_PATH }}
+          project_path: ${{ env.PROJECT_PATH }}
           report_name: ${{ env.NAME }}
           report_title: ${{ env.TITLE }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
