@@ -54,7 +54,7 @@ jobs:
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.cs.opencover.reportsPaths=${{ env.OPENCOVER_REPORTS_PATH }}
-          /d:sonar.coverage.exclusions=${{ COVERAGE_EXCLUSIONS }}
+          /d:sonar.coverage.exclusions=${{ env.COVERAGE_EXCLUSIONS }}
           
       - name: Test
         uses: rocklan/dotnet-tests-report@master
