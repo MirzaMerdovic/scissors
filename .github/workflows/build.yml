@@ -52,7 +52,7 @@ jobs:
           /o:"mimme"
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
-          /d:sonar.cs.opencover.reportsPaths="${{ OPENCOVER_REPORTS_PATH }}"
+          /d:sonar.cs.opencover.reportsPaths="${{ env.OPENCOVER_REPORTS_PATH }}"
           /d:sonar.coverage.exclusions="**Test*.cs"
           
       - name: Test
