@@ -43,6 +43,8 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
 
       - name: Sonar Begin
+        env:
+          OPENCOVER_REPORTS_PATH: ./_TMP/*/coverage.opencover.xml
         shell: pwsh
         run: >
           ./.sonar/scanner/dotnet-sonarscanner begin
@@ -50,7 +52,7 @@ jobs:
           /o:"mimme"
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
-          /d:sonar.cs.opencover.reportsPaths="./_TMP/*/coverage.opencover.xml"
+          /d:sonar.cs.opencover.reportsPaths="$OPENCOVER_REPORTS_PATH"
           /d:sonar.coverage.exclusions="**Test*.cs"
           
       - name: Test
