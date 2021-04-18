@@ -58,17 +58,23 @@ jobs:
           
       - name: Test
         uses: rocklan/dotnet-tests-report@master
+        env:
+          PROJECT_PATH: ./src/scissors.sln
+          NAME: scissors_test_report
+          TITLE: Scissors Tests Report
+          GIST_NAME: scissors_tests.md
+          EXTRA_TEST_PARAMETERS: '--configuration release --collect:"XPlat Code Coverage" --settings ./src/Scissors.Test/runsettings.xml'
         with:
-          project_path: ./src/scissors.sln
-          report_name: scissors_test_report
-          report_title: Scissors Tests Report
+          project_path: ${{ PROJECT_PATH }}
+          report_name: ${{ env.NAME }}
+          report_title: ${{ env.TITLE }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gist_name: scissors_tests.md
+          gist_name: ${{ env.GIST_NAME }}
           gist_badge_label: 'Tests passed: %Counters_passed%/%Counters_total%'
           gist_token: ${{ secrets.GIST_TOKEN }}
           set_check_status_from_test_outcome: true
           fail_build_on_failed_tests: true
-          extra_test_parameters: '--configuration release --collect:"XPlat Code Coverage" --settings ./src/Scissors.Test/runsettings.xml'
+          extra_test_parameters: ${{ env.EXTRA_TEST_PARAMETERS }} 
 
       - name: Sonar End
         env:
