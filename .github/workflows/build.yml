@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -23,7 +23,7 @@ jobs:
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
-          path: ~\sonar\cache
+          path: ~/sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
@@ -31,7 +31,7 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v1
         with:
-          path: .\.sonar\scanner
+          path: ./.sonar/scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
 
@@ -39,53 +39,73 @@ jobs:
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          New-Item -Path ./.sonar/scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
 
       - name: Sonar Begin
+        env:
+          OPENCOVER_REPORTS_PATH: "./_TMP/*/coverage.opencover.xml"
+          COVERAGE_EXCLUSIONS: "**Test*.cs"
         shell: pwsh
         run: >
-          .\.sonar\scanner\dotnet-sonarscanner begin
+          ./.sonar/scanner/dotnet-sonarscanner begin
           /k:"MirzaMerdovic_HttpRequestInterceptor"
           /o:"mimme"
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
           /d:sonar.host.url="https://sonarcloud.io"
-          /d:sonar.cs.opencover.reportsPaths=".\_TMP\*\coverage.opencover.xml"
-          /d:sonar.coverage.exclusions="**Test*.cs"
+          /d:sonar.cs.opencover.reportsPaths=${{ env.OPENCOVER_REPORTS_PATH }}
+          /d:sonar.coverage.exclusions=${{ env.COVERAGE_EXCLUSIONS }}
+          
       - name: Test
         uses: rocklan/dotnet-tests-report@master
+        env:
+          PROJECT_PATH: ./src/scissors.sln
+          NAME: scissors_test_report
+          TITLE: Scissors Tests Report
+          GIST_NAME: scissors_tests.md
+          EXTRA_TEST_PARAMETERS: '--configuration release --collect:"XPlat Code Coverage" --settings ./src/Scissors.Test/runsettings.xml'
         with:
-          project_path: .\src\scissors.sln
-          report_name: scissors_test_report
-          report_title: Scissors Tests Report
+          project_path: ${{ env.PROJECT_PATH }}
+          report_name: ${{ env.NAME }}
+          report_title: ${{ env.TITLE }} 
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gist_name: scissors_tests.md
+          gist_name: ${{ env.GIST_NAME }}
           gist_badge_label: 'Tests passed: %Counters_passed%/%Counters_total%'
           gist_token: ${{ secrets.GIST_TOKEN }}
           set_check_status_from_test_outcome: true
           fail_build_on_failed_tests: true
-          extra_test_parameters: '--configuration release --collect:"XPlat Code Coverage" --settings .\src\Scissors.Test\runsettings.xml'
+          extra_test_parameters: ${{ env.EXTRA_TEST_PARAMETERS }} 
 
       - name: Sonar End
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: pwsh
-        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        run: ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Create nupkg
+        env:
+          ROOT_FOLDER: src/Scissors
         shell: pwsh
         run: |
-          cd src\Scissors
+          cd ${{ env.ROOT_FOLDER }}
           dotnet pack --configuration Release
 
       - name: Publish nupkg package to GitHub
+        env:
+          ROOT_FOLDER: src/Scissors
+          NUPKG_LOCATION: ./bin/Release/*.nupkg
+          NUGET_SOURCE: https://nuget.pkg.github.com/MirzaMerdovic/index.json
         shell: pwsh
         run: |
-          cd src\Scissors
-          dotnet nuget push ".\bin\Release\*.nupkg" --source "https://nuget.pkg.github.com/MirzaMerdovic/index.json" --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
+          cd ${{ env.ROOT_FOLDER }}
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ env.NUGET_SOURCE }}  --api-key "${{ secrets.SCISSORS_PAT }}" --skip-duplicate
 
       - name: Publish nupkg package to Nuget
+        env:
+          ROOT_FOLDER: src/Scissors
+          NUPKG_LOCATION: ./bin/Release/*.nupkg
+          NUGET_SOURCE: https://api.nuget.org/v3/index.json
         shell: pwsh
         run: |
-          cd src\Scissors
-          dotnet nuget push ".\bin\Release\*.nupkg" --source https://api.nuget.org/v3/index.json --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
+          cd ${{ env.ROOT_FOLDER }}
+          dotnet nuget push ${{ env.NUPKG_LOCATION }} --source ${{ env.NUGET_SOURCE }} --api-key "${{ secrets.NUGET_API_KEY }}" --skip-duplicate
