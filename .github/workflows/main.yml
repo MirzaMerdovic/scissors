@@ -33,3 +33,4 @@ jobs:
         with:
           # Repository upload token - get it from codecov.io. Required only for private repositories
           token: 3a47a519-a154-459a-9023-3d9565c65476
+          directory: "./_TMP/"
